@@ -1,0 +1,32 @@
+<div class="search-container">
+  <input [formControl]="searchControl" placeholder="Search countries..." />
+  <div class="error">{{ error }}</div>
+  @if (error) {} @if (results.length) {
+  <div class="results">
+    @for (country of results; track $index) {
+    <div class="country">
+      <h3>{{ country.name.common }}</h3>
+      <p>Population: {{ country.population }}</p>
+      <p>Region: {{ country.region }}</p>
+    </div>
+    }
+  </div>
+  }
+
+  @if(searchHistory.length){
+    <div class="history">
+    <h4>Search History</h4>
+    <ul>
+      @for (entry of searchHistory; track $index) {
+        <li
+        (click)="loadPreviousSearch(entry)"
+      >
+        {{ entry.query }}
+      </li>
+      }
+
+    </ul>
+  </div>
+  }
+
+</div>
